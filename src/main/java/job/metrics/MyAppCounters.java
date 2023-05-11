@@ -1,5 +1,6 @@
 package job.metrics;
 
+import io.opentelemetry.api.common.Attributes;
 import io.opentelemetry.api.metrics.LongCounter;
 import io.opentelemetry.api.metrics.ObservableDoubleGauge;
 
@@ -54,27 +55,27 @@ public class MyAppCounters {
                 .buildWithCallback(result -> result.record(this.statusValue));
     }
 
-    public static void setProcessedRecords(long processedRecords){
-        Instance.processed.add(processedRecords);
+    public static void setProcessedRecords(long processedRecords, Attributes attributes) {
+        Instance.processed.add(processedRecords, attributes);
     }
 
-    public static void setInsertedRecords(long value){
-        Instance.inserts.add(value);
+    public static void setInsertedRecords(long value, Attributes attributes) {
+        Instance.inserts.add(value, attributes);
     }
 
-    public static void setDeletedRecords(long value){
-        Instance.deletions.add(value);
+    public static void setDeletedRecords(long value, Attributes attributes) {
+        Instance.deletions.add(value, attributes);
     }
 
-    public static void setUpdatedRecords(long value){
-        Instance.updates.add(value);
+    public static void setUpdatedRecords(long value, Attributes attributes) {
+        Instance.updates.add(value, attributes);
     }
 
-    public static void setSkippedRecords(long value){
-        Instance.skipped.add(value);
+    public static void setSkippedRecords(long value, Attributes attributes) {
+        Instance.skipped.add(value, attributes);
     }
 
-    public static void setStatus(long status){
+    public static void setStatus(long status) {
         Instance.statusValue = status;
     }
 }
